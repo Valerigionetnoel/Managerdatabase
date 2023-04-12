@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS manager_db;
 CREATE DATABASE manager_db;
 
-USE manager_db
+USE manager_db;
 
 CREATE TABLE department (
    id INT AUTO_INCREMENT PRIMARY KEY,
