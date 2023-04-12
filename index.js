@@ -49,6 +49,8 @@ function doinq() {
                 viewAllEmployees()
             } else if ('Add a role' === choice.start) {
                 addARole()
+            } else if ('Add an employee' === choice.start){
+                addAnEmployee()
             }
 
         })
@@ -201,7 +203,7 @@ function addARole() {
             ]
         }
     ]).then((data) => {
-        connection.query('INSERT INTO role (title, salary, department_id) VALUES (?)(?)(?)', [data.role, data.salary, data.dept_id], (err, data) => {
+        connection.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [data.role, data.salary, data.dept_id], (err, data) => {
             if (err) throw (err)
             console.log('Role added!')
             doinq()
@@ -210,3 +212,77 @@ function addARole() {
     })
 }
 
+function addAnEmployee() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first_n',
+            message: 'What is the first name?'
+        },
+        {
+            type: 'input',
+            name: 'last_n',
+            message: 'What is the last name?'
+        },
+        {
+            type: 'list',
+            name: 'role_id',
+            message: 'What is its role?',
+            choices: [
+                {
+                    name:'Sale lead', value: 1
+                },
+                {
+                    name:'Saleperson', value: 2
+                },
+                {
+                    name:'Lead Engineer', value: 3
+                },
+                {
+                    name:'Software Engineer', value: 4
+                },
+                {
+                    name:'Account Manager', value: 5
+                },
+                {
+                    name:'Accountant', value: 6
+                },
+                {
+                    name:'Legal Team Lead', value: 7
+                },
+                {
+                    name:'Lawyer', value: 8
+                }
+            ]
+        },
+        {
+            type: 'list',
+            name: 'manager_id',
+            message: 'Who is its manager?',
+            choices:[
+                {
+                    name: 'John Doe', value: 1
+                },
+                {
+                    name: 'Ashley Rodriguez', value: 3
+                },
+                {
+                    name: 'Kunal Singh', value: 5
+                },
+                {
+                    name: 'Sarah Lourd', value: 7
+                },
+                {
+                    name: 'None', value: NULL
+                }
+            ]
+        }
+    ]).then((data) => {
+        connection.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [data.first_n, data.last_n, data.role_id, data.manager_id], (err, data) => {
+            if (err) throw (err)
+            console.log('Emplyee added!')
+            doinq()
+        }
+        )
+    })
+}
