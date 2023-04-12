@@ -6,7 +6,7 @@ This application is a database for an entreprise. Its made using MySql and inqui
 
 ## Installation
 
-To run this application, you will need to run npm install in your terminal. Then you will need to install mysql on your computer. Once that is done, open your mysql terminal and run SOURCE schema.sql; then SOURCE seed.sql. Now you have the table on your side. After that you can run node index.js for your normal terminal and voila, you can access the information.
+To run this application, you will need to run npm install in your terminal. Then you will need to install mysql on your computer. Once that is done, open your mysql terminal and run SOURCE db/schema.sql then SOURCE db/seed.sql. Now you have the table on your side. After that you can run node index.js for your normal terminal and voila, you can access the information.
 
 ## Usage
 
