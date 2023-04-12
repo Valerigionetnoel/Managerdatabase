@@ -14,6 +14,8 @@ To run this application, you will need to run npm install in your terminal. Then
 
 To use this application, simply run node index.js after you install it. You will have prompt asking you what you want to do. Choose from the list and add, view or update the database.
 
+Here is a link to a video of the application in action. [Video](https://drive.google.com/file/d/1pR77vvhjNgNA4T0Z6luTKhe-zbT_ETux/view)
+
 ## Credits
 
 [Valerigionetnoel](https://github.com/Valerigionetnoel) you can email me [here](mailto:valeri.gionetnoel@gmail.com)
