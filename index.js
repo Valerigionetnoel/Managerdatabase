@@ -36,18 +36,19 @@ function doinq() {
         ])
         .then((choice) => {
             if ('View all department' === choice.start) {
-                connection.query('SELECT * FROM department', (err, data) => {
-                    if (err) throw (err)
-                    console.table(data)
-                    doinq()
-                })
+                viewAllDepartment()
             } else if ('Add a department' === choice.start) {
                 addADepartment()
-
             } else if ('Exit' === choice.start) {
                 process.exit()
-            } else if ('Update an employee role'=== choice.start){
+            } else if ('Update an employee role'=== choice.start) {
                 updateEmployeeRole()
+            } else if ('View all roles' === choice.start) {
+                viewAllRoles()
+            } else if ('View all employees' === choice.start) {
+                viewAllEmployees()
+            } else if ('Add a role' === choice.start) {
+                addARole()
             }
 
         })
@@ -73,9 +74,35 @@ function addADepartment() {
 function updateEmployeeRole(){
     inquirer.prompt([
         {
-            type: 'input',
+            type: 'list',
             name: 'employeetoupdate',
-            message: 'Which employee would you like to update?'
+            message: 'Which employee would you like to update?',
+            choices: [
+                {
+                    name:'John Doe', value: 1
+                },
+                {
+                    name:'Mike Chan', value: 2
+                },
+                {
+                    name:'Ashley Rodriguez', value: 3
+                },
+                {
+                    name:'Kevin Tupik', value: 4
+                },
+                {
+                    name:'Kunal Singh', value: 5
+                },
+                {
+                    name:'Malia Brown', value: 6
+                },
+                {
+                    name:'Sarah Lourd', value: 7
+                },
+                {
+                    name:'Tom Allen', value: 8
+                }
+            ]
         },
         {
             type: 'list',
@@ -86,7 +113,25 @@ function updateEmployeeRole(){
                     name:'Sale lead', value: 1
                 },
                 {
-
+                    name:'Saleperson', value: 2
+                },
+                {
+                    name:'Lead Engineer', value: 3
+                },
+                {
+                    name:'Software Engineer', value: 4
+                },
+                {
+                    name:'Account Manager', value: 5
+                },
+                {
+                    name:'Accountant', value: 6
+                },
+                {
+                    name:'Legal Team Lead', value: 7
+                },
+                {
+                    name:'Lawyer', value: 8
                 }
             ]
         }
@@ -98,4 +143,69 @@ function updateEmployeeRole(){
         })
     })
 
+}
+
+function viewAllRoles() {
+    connection.query('SELECT * FROM role', (err, data) => {
+        if (err) throw (err)
+        console.table(data)
+        doinq()
+    })
+}
+
+function viewAllDepartment() {
+    connection.query('SELECT * FROM department', (err, data) => {
+        if (err) throw (err)
+        console.table(data)
+        doinq()
+    })
+}
+
+function viewAllEmployees() {
+    connection.query('SELECT * FROM employee', (err, data) => {
+        if (err) throw (err)
+        console.table(data)
+        doinq()
+    })
+}
+
+function addARole() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'role',
+            message: 'What would you call this role?'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'What is the salary?'
+        },
+        {
+            type: 'list',
+            name: 'dept_id',
+            message: 'In what department would it be?',
+            choices:[
+                {
+                    name: 'Sales', value: 1
+                },
+                {
+                    name: 'Engineering', value: 2
+                },
+                {
+                    name: 'Finance', value: 3
+                },
+                {
+                    name: 'Legal', value: 4
+                }
+            ]
+        }
+    ]).then((data) => {
+        connection.query('INSERT INTO role (title, salary, department_id) VALUES (?)', [data.role, data.salary, data.dept_id], (err, data) => {
+            if (err) throw (err)
+            console.log('Role added!')
+            doinq()
+        }
+        )
+    })
 }
