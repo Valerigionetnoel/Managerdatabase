@@ -148,7 +148,7 @@ function updateEmployeeRole(){
 }
 
 function viewAllRoles() {
-    connection.query('SELECT * FROM role', (err, data) => {
+    connection.query('SELECT role.id, role.title, role.salary, department.name FROM role JOIN department ON department_id = department.id', (err, data) => {
         if (err) throw (err)
         console.table(data)
         doinq()
@@ -164,7 +164,7 @@ function viewAllDepartment() {
 }
 
 function viewAllEmployees() {
-    connection.query('SELECT * FROM employee', (err, data) => {
+    connection.query('SELECT employee.id, first_name, last_name, title, salary, manager_id, name AS department FROM employee JOIN role ON role_id = role.id JOIN department ON department_id = department.id', (err, data) => {
         if (err) throw (err)
         console.table(data)
         doinq()
