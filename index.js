@@ -273,7 +273,7 @@ function addAnEmployee() {
                     name: 'Sarah Lourd', value: 7
                 },
                 {
-                    name: 'None', value: NULL
+                    name: 'None', value: null,
                 }
             ]
         }
