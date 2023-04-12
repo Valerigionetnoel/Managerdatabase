@@ -201,7 +201,7 @@ function addARole() {
             ]
         }
     ]).then((data) => {
-        connection.query('INSERT INTO role (title, salary, department_id) VALUES (?)', [data.role, data.salary, data.dept_id], (err, data) => {
+        connection.query('INSERT INTO role (title, salary, department_id) VALUES (?)(?)(?)', [data.role, data.salary, data.dept_id], (err, data) => {
             if (err) throw (err)
             console.log('Role added!')
             doinq()
@@ -209,3 +209,4 @@ function addARole() {
         )
     })
 }
+
