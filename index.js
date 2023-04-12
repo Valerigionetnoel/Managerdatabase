@@ -29,12 +29,32 @@ function doinq() {
                     'Add a department',
                     'Add a role',
                     'Add an employee',
-                    'Update an employee role'
+                    'Update an employee role',
+                    'Exit'
                 ]
             },
         ])
         .then((choice) => {
-            console.log(choice)
-            connection.query('INSERT INTO ')
+            if ('View all department' === choice.start){
+                connection.query('SELECT * FROM department',(err,data) => {
+                    if (err) throw (err)
+                    console.table(data)
+                    doinq()
+                })
+            }else if('Add a department' === choice.start){
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'department',
+                        message: 'What would you call the department?'
+                    }
+                ]).then((department) => {
+                    
+                })
+
+            } else if ('Exit' === choice.start){
+                process.exit()
+            }
+           
         })
 }
